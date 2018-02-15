@@ -33,9 +33,24 @@ const App = (function() {
           ` ${countryTwo}`;
         blockHeader.innerHTML = `${countryOne} --> ${countryTwo}`;
 
+        let chartButton = document.createElement("button")
+        chartButton.innerText = "Comparison Chart"
+
+        chartButton.addEventListener("click", function(e){
+          let parentDiv = e.target.parentElement
+          let parentText = parentDiv.innerText.slice(0,11)
+          let currencyOne = 'USD' + parentText.slice(0,3)
+          let currencyTwo = 'USD' + parentText.slice(8)
+          console.log(currencyOne)
+          console.log(currencyTwo)
+          currencyAPI.renderDivChart(currencyOne,currencyTwo)
+
+        })
+
         currencyBlock.append(blockHeader);
         currencyBlock.append(convertedValue);
         currencyBlock.append(deleteButton);
+        currencyBlock.append(chartButton);
         currencies.append(currencyBlock);
         currencyAPI.createRateObject(countryOne, countryTwo, conversionValue);
       });
